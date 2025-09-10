@@ -29,8 +29,6 @@ public class UserServiceImpl implements UserService{
 		User user = modelMapper.map(userRequest, User.class);
 		User savedUser = userRepository.save(user);
 		
-		log.debug("User saved with ID: {}", savedUser.getId());
-		
 		return modelMapper.map(savedUser, UserResponseDto.class);
 	}
 	
