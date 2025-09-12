@@ -50,6 +50,20 @@ public class GlobalExceptionHandler {
 	}
 	
 	/**
+	 * Handle duplicate user
+	 */
+	@ExceptionHandler(EmailAlreadyExistsException.class)
+	public  ResponseEntity<ErrorInfo> handleEmailAlreadyExists(EmailAlreadyExistsException ex){
+		ErrorInfo errorInfo = new ErrorInfo(
+				ex.getMessage(),
+				HttpStatus.CONFLICT.value(),
+				LocalDateTime.now()
+		);
+		return ResponseEntity.status(HttpStatus.CONFLICT.value()).body(errorInfo);
+	
+	}
+	
+	/**
 	 * Handle all uncaught exceptions (fallback).
 	 */
 	@ExceptionHandler(Exception.class)
